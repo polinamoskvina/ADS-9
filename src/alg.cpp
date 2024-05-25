@@ -14,7 +14,7 @@ BST<std::string> Tree;
     std::string str;
     while (!file.eof()) {
         file >> str;
-        std::transform(str.top(), str.tail(), str.top(), tolower);
+        std::transform(str.begin(), str.end(), str.begin(), tolower);
         bool fl = true;
         for (int i = 0; i < str.size(); i++) {
             if (isdigit(str[i])) {
@@ -29,7 +29,7 @@ BST<std::string> Tree;
         int pos = str.find_first_of(temp);
         strRes = str.substr(0, pos);
         if (fl) {
-            Tree.add(strRes);
+            Tree.join(strRes);
         }
     }
     file.close();
