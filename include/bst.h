@@ -17,13 +17,13 @@ class BST {
  private:
     Node* Root;
     Node* joinnode(Node*, const T&);
-    int findnode(Node* Root, const T& variable);
-    int heightnode(Node* Root);
+    int searchnode(Node* Root, const T& variable);
+    int depthnode(Node* Root);
 
  public:
     BST();
-    int height();
-    int find(T variable);
+    int depth();
+    int search(T variable);
     void join(const T& variable);
     ~BST() {}
 };
@@ -54,31 +54,31 @@ void BST<T>::join(const T& variable) {
 }
 
 template <typename T>
-int BST<T>::heightnode(Node* Root) {
+int BST<T>::depthnode(Node* Root) {
     if (!Root) {
         return 0;
     }
-    return 1 + std::max(heightnode(Root->leftward), heightnode(Root->righ));
+    return 1 + std::max(depthnode(Root->leftward), depthnode(Root->righ));
 }
 
 template <typename T>
-int BST<T>::height() {
-    return heightnode(Root) - 1;
+int BST<T>::depth() {
+    return depthnode(Root) - 1;
 }
 
 template <typename T>
-int BST<T>::findnode(Node* Root, const T& variable) {
+int BST<T>::searchnode(Node* Root, const T& variable) {
     if (Root == nullptr || Root->variable == variable) {
         return Root->counter;
     } else if (Root->variable < variable) {
-        return findnode(Root->righ, variable);
+        return searchnode(Root->righ, variable);
     }
-    return findnode(Root->leftward, variable);
+    return searchnode(Root->leftward, variable);
 }
 
 template <typename T>
-int BST<T>::find(T variable) {
-    return findnode(Root, variable);
+int BST<T>::search(T variable) {
+    return searchnode(Root, variable);
 }
 
 #endif  // INCLUDE_BST_H_
